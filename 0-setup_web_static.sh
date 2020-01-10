@@ -21,9 +21,9 @@ sudo ln -s -f /data/web_static/releases/test /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data
 
 # alias
-echo '
+echo "
 server {
-	add_header X-Served-By '"$HOSTNAME"';
+	add_header X-Served-By $HOSTNAME;
 	listen 80 default_server;
 	listen [::]:80 default_server;
 	root /var/www/html;
@@ -31,12 +31,12 @@ server {
 	server_name _;
 	error_page 404 /404.html;
 	location / {
-		try_files $uri $uri/ =404;
+		try_files \$uri \$uri/ =404;
 	}
 	location /hbnb_static {
 		alias /data/web_static/current;
 	}
 }
-' | sudo tee /etc/nginx/sites-available/default
+" | sudo tee /etc/nginx/sites-available/default
 
 sudo service nginx restart
