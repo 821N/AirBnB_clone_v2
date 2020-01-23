@@ -45,6 +45,9 @@ class DBStorage:
                 ret.update(self.all(c))
         return ret
 
+    def close(self):
+        self.__session.remove()
+
     def new(self, obj):
         """ add object to session """
         self.__session.add(obj)
